@@ -29,7 +29,7 @@ def visit_image(config, url):
             with open (filename, "wb") as f:
                 f.write(content)
             df = pd.DataFrame(data={"url" : [url], "uuid": [unq_id]}, columns=["url", "uuid"])
-            df.to_csv(config.OUTPUT_DIR + "/" + config.META_FILE, index=False, header=True, mode="a")
+            df.to_csv(config.OUTPUT_DIR + "/" + config.META_FILE, index=False, header=False, mode="a")
     except:
         logger.error("error with url : {}".format(url))
 

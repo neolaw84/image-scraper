@@ -8,7 +8,7 @@ To download images from online galleries using simple directory structure
   * Minimum config
   * Site with pagination
   * Each page has multiple sub-pages (model pages)
-  * Each model page has multiple sub-pages (gallery pages)
-  * Each gallery page has links to images
+  * Each model page has multiple sibling-pages 
+  * Each model page has links to images
   * Produces url to uuid table as meta data
   * Delays randomly
