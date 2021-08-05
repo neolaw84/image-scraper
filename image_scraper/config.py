@@ -1,6 +1,6 @@
 # delay between calls (mean and standard deviation)
-DELAY_MEAN = 5
-DELAY_STD = 3
+DELAY_MEAN = 4
+DELAY_STD = 2
 
 # random seed for delays
 RANDOM_SEED = 123456

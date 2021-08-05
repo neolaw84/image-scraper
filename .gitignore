@@ -133,3 +133,4 @@ tests/test_jjgirls.py
 images
 
 .vscode
+image_scraper/download_jjgirls.py

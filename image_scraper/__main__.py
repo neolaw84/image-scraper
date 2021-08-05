@@ -81,8 +81,8 @@ def visit_page(config, page_url):
 
 def main(config):
     df = pd.DataFrame(data={}, columns=["url", "uuid"])
-    df.to_csv(config.OUTPUT_DIR + "/" + config.META_FILE, index=False, header=True, mode="a")
-    for page_id in range(config.PAGE_START, config.PAGE_END):
+    df.to_csv(config.OUTPUT_DIR + "/" + config.META_FILE, index=False, header=False, mode="a")
+    for page_id in range(config.PAGE_START, config.PAGE_END + 1):
         page_url = config.URL_PREFIX.format(page_id=page_id)
         visit_page(config, page_url)
 
