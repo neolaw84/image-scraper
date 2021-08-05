@@ -34,6 +34,7 @@ def visit_image(config, url):
         logger.error("error with url : {}".format(url))
 
 def visit_model_page(config, url):
+    logger.info("working on page : {}".format(url))
     content = _download(config, url)
     if not content:
         return
@@ -83,6 +84,7 @@ def main(config):
     df = pd.DataFrame(data={}, columns=["url", "uuid"])
     df.to_csv(config.OUTPUT_DIR + "/" + config.META_FILE, index=False, header=False, mode="a")
     for page_id in range(config.PAGE_START, config.PAGE_END + 1):
+        logger.info("working on page_id : {}".format(page_id))
         page_url = config.URL_PREFIX.format(page_id=page_id)
         visit_page(config, page_url)
 
