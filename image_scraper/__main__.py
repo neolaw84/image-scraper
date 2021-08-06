@@ -1,7 +1,6 @@
 import os
 import uuid
 from uuid import uuid5
-import warnings
 import logging
 
 import requests
@@ -17,7 +16,7 @@ logger.setLevel(logging.INFO)
 def _download(config, url):
     try:
         if check_if_visited_and_add(url):
-            warnings.warn("url : {} is already visited.".format(url))
+            logger.warn("url : {} is already visited.".format(url))
             return None
         r = requests.get(url, allow_redirects=True)
         delay_mean_and_std(config.DELAY_MEAN, config.DELAY_STD)
