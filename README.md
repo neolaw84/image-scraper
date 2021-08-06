@@ -12,3 +12,8 @@ To download images from online galleries using simple directory structure
   * Each model page has links to images
   * Produces url to uuid table as meta data
   * Delays randomly
+
+* 2021-08-06 : Check if downloaded
+  * Check in the meta file if it is downloaded
+  * Append to meta file accordingly
+  * Replace config with easydict
