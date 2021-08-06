@@ -9,3 +9,25 @@ def delay_mean_and_std(mean:int = 5, std:int = 3):
 
 delay_mean_and_std.seed=123456
 delay_mean_and_std.init=False
+
+def check_if_visited_and_add(url:str=None):
+    try:
+        if not check_if_visited_and_add.init:
+            check_if_visited_and_add.urls = {}
+            check_if_visited_and_add.init = True
+        url_parts = url.split("/")
+        urls = check_if_visited_and_add.urls
+        for p in url_parts:
+            if p in urls.keys():
+                urls = urls[p]
+            elif p == url_parts[-1]:
+                urls[p] = True
+                return False
+            else:
+                urls[p] = {}
+                urls = urls[p]
+        return True
+    except:
+        return False
+
+check_if_visited_and_add.init=False

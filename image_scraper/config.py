@@ -1,3 +1,5 @@
+from easydict import EasyDict
+
 # delay between calls (mean and standard deviation)
 DELAY_MEAN = 4
 DELAY_STD = 2
@@ -49,3 +51,18 @@ def get_image_url(component):
 OUTPUT_DIR = "~/outputs/"
 META_FILE = "meta.csv"
 
+_functions_to_include = [
+    "extract_link", 
+    "extract_link_sub_page", 
+    "get_siblings", 
+    "get_image_url", 
+]
+
+def dict_from_module(module):
+    context = {}
+    for k, v in module.items():
+        if k.isupper() or k in _functions_to_include:
+            context[k] = v
+    return context
+
+default_config = EasyDict(dict_from_module(globals()))
