@@ -38,19 +38,32 @@ def visit_image(config, url):
     except:
         logger.error("error with url : {}".format(url))
 
-def visit_model_page(config, url):
+def visit_model_page(config, url, recur=1):
+    recur = recur - 1
     logger.info("working on page : {}".format(url))
     content = _download(config, url)
     if not content:
         return
     soup = BeautifulSoup(content, "html.parser")
-    divs = soup.find_all("div", {"class": config.PAGE_DIV_CLASS})
+    if config.PAGE_COMPONENT:
+        divs = soup.find_all(config.PAGE_COMPONENT)
+    else:
+        divs = soup.find_all("div", {"class":config.PAGE_DIV_CLASS})
     for div in divs:
         hrefs = div.find_all("a", href=True)
         for h in hrefs:
             u = config.get_image_url(h)
             if u:
                 visit_image(config, url=u)
+            elif config.NESTED_TRY and recur >= 0:
+                try:
+                    u = config.extract_link_sub_page(h["href"])
+                    if u:
+                        visit_model_page(config, url=u, recur=recur)
+                except Exception as e:
+                    print (e)
+                    log.error(e)
+    
 
 def visit_model_pages(config, url):
     content = _download(config, url)
@@ -60,7 +73,10 @@ def visit_model_pages(config, url):
     urls = config.get_siblings(soup)
     if urls:
         for u in urls:
-            visit_model_page(config, u)
+            try:
+                visit_model_page(config, u)
+            except:
+                logger.error("error with url : {}".format(u))
     else:
         visit_model_page(config, url)
 
@@ -76,7 +92,10 @@ def visit_page(config, page_url):
         if not content:
             return
         soup = BeautifulSoup(content, 'html.parser')
-        page_div = soup.find_all("div", {"class":config.PAGE_DIV_CLASS})
+        if config.PAGE_COMPONENT:
+            page_div = soup.find_all(config.PAGE_COMPONENT)
+        else:
+            page_div = soup.find_all("div", {"class":config.PAGE_DIV_CLASS})
         if isinstance(page_div, list):
             for pd in page_div:
                 _extract_a_href(pd)

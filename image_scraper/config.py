@@ -13,6 +13,7 @@ PAGE_START = 1
 PAGE_END = 99
 # all a href within this class will be followed
 PAGE_DIV_CLASS = "div_with_links"
+PAGE_COMPONENT=None
 
 # a function to extract links from a href
 # return None to stop following
@@ -50,6 +51,8 @@ def get_image_url(component):
 # output directory and meta file
 OUTPUT_DIR = "~/outputs/"
 META_FILE = "meta.csv"
+
+NESTED_TRY = False
 
 _functions_to_include = [
     "extract_link", 

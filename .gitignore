@@ -134,3 +134,4 @@ images
 
 .vscode
 image_scraper/download_jjgirls.py
+image_scraper/download_javpictures.py
