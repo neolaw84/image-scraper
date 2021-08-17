@@ -17,3 +17,8 @@ To download images from online galleries using simple directory structure
   * Check in the meta file if it is downloaded
   * Append to meta file accordingly
   * Replace config with easydict
+
+* 2021-08-17 : Refactor
+  * Default config is to scrap all jpg/jpeg/png from the initial page
+  * And to increment the pages
+  * Also, dig the site for 3 links deep for all href (both relative and absolute)
